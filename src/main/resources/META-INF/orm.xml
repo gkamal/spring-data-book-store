@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    version="2.0"
+    xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd" >
+
+    <named-query name="Order.findPendingOrders" >
+        <query>
+			<![CDATA[select o from Order o where o.status = 'PENDING']]>
+        </query>
+    </named-query>
+    
+    <named-query name="Order.findOrdersForPeriod" >
+        <query>
+			<![CDATA[select o from Order o where o.date between :start and :end]]>
+        </query>
+    </named-query>
+
+</entity-mappings>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<mongo:mongo id="mongo" host="localhost" port="27017" />
+
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongo" />
+		<constructor-arg value="bookstore" />
+	</bean>
+
+	<mongo:repositories base-package="tenx.spring.data.repository.mongo" />
+
+	<jpa:repositories base-package="tenx.spring.data.repository.jpa" />
+
+	<util:properties id="jpaProperties">
+		<prop key="hibernate.default_schema">${hibernate.default_schema}</prop>
+		<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+		<prop key="hibernate.ejb.naming_strategy">${hibernate.ejb.naming_strategy}</prop>
+	</util:properties>
+
+	<context:component-scan base-package="tenx.spring.data">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<bean id="jpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+		p:showSql="${jpaVendorAdapter.showSql}" p:generateDdl="${jpaVendorAdapter.generateDdl}"
+		p:database="${jpaVendorAdapter.database}" />
+
+	<context:property-placeholder location="classpath*:META-INF/config.properties"
+		ignore-resource-not-found="true" />
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		p:driverClassName="${dataSource.driverClassName}" p:url="${dataSource.url}"
+		destroy-method="close" />
+</beans>
