@@ -1,7 +1,6 @@
 package tenx.spring.data.repository.mongodb;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
@@ -17,18 +16,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import tenx.spring.data.domain.Book;
 import tenx.spring.data.domain.Order;
 import tenx.spring.data.repository.jpa.OrderRepository;
-import tenx.spring.data.repository.mongo.BookRepository;
 
 @ContextConfiguration("classpath:META-INF/spring/application-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)

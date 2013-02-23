@@ -10,6 +10,9 @@ import org.springframework.data.repository.query.Param;
 import tenx.spring.data.domain.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
+	
 	Page<Order> findPendingOrders(Pageable pageable);
-	Page<Order> findOrdersForPeriod(@Param("start") Date start,@Param("start") Date end, Pageable pageable);
+	
+	Page<Order> findOrdersForPeriod(@Param("start") Date start,@Param("start") Date end, 
+			Pageable pageable);
 }

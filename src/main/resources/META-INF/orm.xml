@@ -15,5 +15,18 @@
 			<![CDATA[select o from Order o where o.date between :start and :end]]>
         </query>
     </named-query>
+    
+    <named-query name="User.findUserSomeComplexWay" >
+        <query>
+  <![CDATA[select u from User u where lower(u.userName) = :userName
+			 or upper(u.userName) = :userName]]>
+        </query>
+    </named-query>
 
 </entity-mappings>
+
+
+
+
+
+

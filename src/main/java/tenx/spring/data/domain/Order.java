@@ -13,7 +13,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "orders")
 public class Order {
-
 	public enum Status {
 		PENDING, FULL_FILLED, REJECTED
 	}
